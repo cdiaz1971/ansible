@@ -1,0 +1,28 @@
+#Replace subnet and sg with real id
+- hosts: localhost
+  gather_facts: yes
+  vars_files:
+       - keys.yml
+       - hostname.yml
+  tasks:
+       - name: Create Instance
+         ec2:
+             aws_access_key: "{{AWS_ACCESS_KEY}}"
+             aws_secret_key: "{{AWS_SECRET_KEY}}"
+             ec2_region: "{{AWS_REGION}}"
+             key_name: Current_aws
+             instance_type: t2.micro
+             image: ami-0ab4d1e9cf9a1215a
+             vpc_subnet_id: subnet-xxxxxxxxxxxxxxxxx
+             assign_public_ip: yes
+             group_id : sg-xxxxxxxxxxxxxxxxx
+             volumes:
+                 - device_name: /dev/xvda
+                   volume_type: gp2
+                   volume_size: 8
+                   delete_on_termination: true
+             instance_tags:
+                  Name: "{{HOST_NAME}}"
+
+
+ 

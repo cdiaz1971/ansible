@@ -1,0 +1,12 @@
+- hosts: localhost
+  gather_facts: yes
+  vars_files:
+       - keys.yml
+  tasks:
+       - name: Create Instance
+         ec2:
+             aws_access_key: "{{AWS_ACCESS_KEY}}"
+             aws_secret_key: "{{AWS_SECRET_KEY}}"
+             ec2_region: "{{AWS_REGION}}"
+
+ 

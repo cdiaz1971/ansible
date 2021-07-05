@@ -1,0 +1,18 @@
+- hosts: "{{ passed_in_hosts }}"
+  gather_facts: yes
+  become: true
+  vars_files:
+       - keys.yml
+       - hostname.yml
+  tasks:
+          - hostname: name="{{HOST_NAME}}"
+          - name: yum update
+            yum:
+              name: '*'
+              state: latest
+          - name: reboot instance
+            reboot:
+              reboot_timeout: 60
+
+
+ 
